@@ -1,0 +1,10 @@
+__pycache__
+.ipynb_checkpoints
+venv/
+.env
+
+database.ini
+
+*.png
+*.txt
+*.gexf
