@@ -22,7 +22,7 @@ def query(region):
         year = '1984'
         dateandtime = year + '-01-01 00:00:00'
         condition=(f"SELECT * FROM california WHERE datetime>='{dateandtime}'"
-                    f" AND (magtype LIKE 'l' OR magtype LIKE 'w')")
+                    f" AND magtype IN ('l','w')")
 
     # ITALY
     if region=='italy':
@@ -38,6 +38,6 @@ def query(region):
         dateandtime = year + '-01-01 00:00:00'
         condition=(f"SELECT * FROM japan WHERE datetime>='{dateandtime}'"
                     f" AND latitude>0 AND longitude>0 AND depth>0"
-                    f" AND magtype LIKE 'V'")
+                    f" AND magtype IN ('V','v','D','d','W')")
 
     return condition

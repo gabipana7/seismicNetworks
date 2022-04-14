@@ -15,18 +15,18 @@ plt.rcParams['text.usetex'] = True
 #az.style.use('arviz-darkgrid')
 
 
-def visualize(quakes,region,withMap=False):
+def visualize(quakes,region,withMap=False,mapcoords={}):
 
 	# -------------------------SCALES FOR THE DOTS BASED ON MAG-----------------------------------#
 	# Make scales for the dots changing with magnitude
 	# Set scale for the colors of dots
-	magnitudes=[int(x) for x in quakes['magnitude']]
+	magnitudes=[float(x) for x in quakes['magnitude']]
 
 	# Set scale for the sizes of dots
 	mean = int(quakes['magnitude'].mean())
 	max1 = int(quakes['magnitude'].max())
 	min1 = int(quakes['magnitude'].min())
-	magnitudesScale=[((x-mean)/(max1-min1))*250 for x in quakes['magnitude']]
+	magnitudesScale=[((x-mean)/(max1-min1))*150 for x in quakes['magnitude']]
 	# ----------------------------------------------------------------------------------------------#
 
 
@@ -83,21 +83,40 @@ def visualize(quakes,region,withMap=False):
 		ax.zaxis.pane.fill = False
 		ax.zaxis.pane.set_edgecolor('white')
 		ax.grid(False)
-		
+
+
+		img = mpimg.imread(f'./maps/{region}.png')
+		# Create lists of points ranging from:
+		# For x : longitude 
+		xx = np.linspace(mapcoords['minLon'],mapcoords['maxLon'],img.shape[0])
+		# For y : latitude 
+		yy = np.linspace(mapcoords['minLat'],mapcoords['maxLat'],img.shape[1])
+
+		# Create the x component of the grid for the image plot
+		x = np.ndarray((img.shape[0],1))
+		# Create y component of the grid for the image plot
+		y = np.ndarray((1,img.shape[1]))
+		# Create the z component (choose at which depth the image is plotted)
+		z = -mapcoords['maxDepth'] * np.ones(x.shape)
+
+
+		'''
 		if region == 'romania':
 			img = mpimg.imread('./maps/romania.png')
 			# Create lists of points ranging from:
 			# For x : longitude 19.8 - 30.2
-			xx = np.linspace(19.8,30.2,img.shape[0])
+			xx = np.linspace(20.19,29.84,img.shape[0])
+			#xx = np.linspace(19.8,30.2,img.shape[0])
 			# For y : latitude 43.5941 - 48.4 
-			yy = np.linspace(43.5941,48.4,img.shape[1])
+			#yy = np.linspace(43.5941,48.4,img.shape[1])
+			yy = np.linspace(43.5941,48.23,img.shape[1])
 
 			# Create the x component of the grid for the image plot
 			x = np.ndarray((img.shape[0],1))
 			# Create y component of the grid for the image plot
 			y = np.ndarray((1,img.shape[1]))
 			# Create the z component (choose at which depth the image is plotted)
-			z = -196 * np.ones(x.shape)
+			z = -218.4 * np.ones(x.shape)
 
 		if region == 'vrancea':
 			img = mpimg.imread('./maps/vrancea.png')
@@ -166,7 +185,7 @@ def visualize(quakes,region,withMap=False):
 			# x coordinate
 			# y coordinate
 			# z coordinate - the depth at which the 2D image will be displayed, preferably under the scatterplot
-
+		'''
 
 		# Assign x values (first component) the proper longitude
 		for i in range(len(x)):

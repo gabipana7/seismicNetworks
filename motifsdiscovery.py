@@ -1,12 +1,21 @@
 import time
-from GraphProcessor import GraphProcessor
-from Utility import Utility
-from RandomGraphGenerator import RandomGraphGenerator
+import os
+from nemomap.GraphProcessor import GraphProcessor
+from nemomap.Utility import Utility
+from nemomap.RandomGraphGenerator import RandomGraphGenerator
 from statistics import pstdev
+
+
+# For which region networks do you want to discover motifs ?
+region = input('Input region : vrancea / romania / california / italy / japan : ')
+
+
 
 '''Get File names and see if they can be opened'''
 inputName = input("Input Graph: ")
 queryName = input("Query Graph: ")
+
+
 
 goodInput = True
 try:
@@ -20,7 +29,14 @@ except IOError:
     print("Query File Error -  check spelling and that file exists")
     goodInput = False
 
+
+
+
 if goodInput:
+
+    if not os.path.exists(f'./results/{region}/networks/motifs'):
+        os.makedirs(f'results/{region}/networks/motifs')
+
     '''Create Graphs'''
     myGP = GraphProcessor()
     inputGraph = myGP.loadGraph(inputName, directed=True)
