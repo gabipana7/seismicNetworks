@@ -4,7 +4,6 @@ from geopy.distance import distance
 from geopy.point import Point
 import math
 import numpy as np
-import matplotlib
 
 
 #-------------------------MOTIFS FILE PROCESSING--------------------------------#
@@ -15,7 +14,7 @@ import matplotlib
 # Calculates the total and mean energy per motif
 def totalMeanEnergyMotif(region,side,mag,motif,originalG,quakesDataFrame):
     # Open the motifs file
-    fileMotif = open(f'quakes{region}_{side}km_{mag}mag_{motif}.txt', 'r')
+    fileMotif = open(f'./results/{region}/networks/motifs/motifs{motif}_network{region}_{side}km_{mag}mag.txt', 'r')
     linesMotif = fileMotif.readlines()
 
     # Properly evaluate the Lines to get the Lists
