@@ -1,7 +1,9 @@
-from Graph import Graph
+from .Graph import Graph
 from collections import defaultdict
 from bisect import bisect_left
 from random import randrange
+
+import os
 
 
 # noinspection PyPep8Naming
@@ -401,6 +403,8 @@ class Utility:
 
         return self.findCondition(mappedHNodes, theMappings, condition, equivalenceClass)
 
+    ###################################################################################
+    # INPUT REGION HERE TO ESTABLISH WHERE RESULTS ARE SAVED 
     def algorithm2_modified(self, queryGraph, inputGraph, h, isRandomGraph):
         """
         Method to use NemoMap algorithm (i.e. Algorithm 5 from the NemoMap paper)
@@ -417,7 +421,7 @@ class Utility:
         """
         self.random = isRandomGraph
         if not self.random:
-            self.output = open("static/output.txt", "w")
+            self.output = open("./motifs/output.txt", "w")
         condition = self.algorithm2_modified_for_equivalance_class(queryGraph, queryGraph, h)
 
         # for con in condition:
