@@ -1,7 +1,12 @@
-
-from nemomap.motifsdiscovery import getMotif
+from nemomap.motifsdiscovery import getMotif,getMotifQuery
 import json
 import os
+
+
+# function to write json files
+def write_json(path, data, indent=4):
+    with open(path, 'w') as file: 
+        json.dump(data, file, indent=indent) 
 
 
 # For which region networks do you want to discover motifs ?
@@ -12,13 +17,39 @@ initialdir = os.getcwd()
 motifStats={}
 
 
-for motif in ['Triangles','Tetrahedrons']:
-    stats = getMotif(region,motif)
-    motifStats[motif]=stats
-    if motif == 'Triangles':
-        os.chdir(initialdir)
+
+for motif in ['Triangles']:#,'Tetrahedrons']:
+
+    motifStats[motif]={}
+
+
+    os.chdir('./nemomap')
+    queryGraph = getMotifQuery(motif)
+    os.chdir('..')
+
+
+    os.chdir(f'./results/{region}/networks')
+
+    if not os.path.exists(f'./motifs'):
+        os.makedirs(f'motifs')
 
 
 
-with open(f"./motifs/motifStats_{region}.json","w") as f:
-    json.dump(motifStats,f)
+    for file in sorted(os.listdir()):
+        if file.endswith(".txt"):    
+
+            inputName = file
+            print(inputName)
+
+
+            stats = getMotif(inputName,motif,queryGraph)
+
+            motifStats[motif][inputName]=stats
+
+            write_json(f"./motifs/motifStats_{region}.json", motifStats)
+
+    #if motif == 'Triangles':
+    os.chdir(initialdir)
+
+
+
