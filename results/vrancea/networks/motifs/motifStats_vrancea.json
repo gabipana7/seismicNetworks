@@ -4,115 +4,405 @@
             "Nodes": 536,
             "Edges": 5048,
             "Mappings": 37121,
-            "AvgMap": 9448.0,
-            "Time": 1.4791245460510254
+            "AvgMap": 9370.0,
+            "Time": 1.4554412364959717
         },
         "networkvrancea_10km_2mag.txt": {
             "Nodes": 519,
             "Edges": 4960,
             "Mappings": 36789,
-            "AvgMap": 8373.0,
-            "Time": 1.6058120727539062
+            "AvgMap": 11660.0,
+            "Time": 1.6395998001098633
         },
         "networkvrancea_10km_3mag.txt": {
             "Nodes": 320,
             "Edges": 2534,
             "Mappings": 11909,
-            "AvgMap": 2285.0,
-            "Time": 0.4033684730529785
+            "AvgMap": 3533.0,
+            "Time": 0.42113757133483887
         },
         "networkvrancea_10km_4mag.txt": {
             "Nodes": 113,
             "Edges": 326,
             "Mappings": 135,
-            "AvgMap": 30.0,
-            "Time": 0.009833574295043945
+            "AvgMap": 62.0,
+            "Time": 0.008634090423583984
         },
         "networkvrancea_5km_1mag.txt": {
             "Nodes": 1723,
             "Edges": 7471,
             "Mappings": 2124,
-            "AvgMap": 832.0,
-            "Time": 0.7072808742523193
+            "AvgMap": 1150.0,
+            "Time": 0.7091586589813232
         },
         "networkvrancea_5km_2mag.txt": {
             "Nodes": 1684,
             "Edges": 7383,
             "Mappings": 2137,
-            "AvgMap": 1150.0,
-            "Time": 0.6990799903869629
+            "AvgMap": 980.0,
+            "Time": 0.6863269805908203
         },
         "networkvrancea_5km_3mag.txt": {
             "Nodes": 983,
             "Edges": 3721,
             "Mappings": 1122,
-            "AvgMap": 631.0,
-            "Time": 0.20838642120361328
+            "AvgMap": 360.0,
+            "Time": 0.20877861976623535
+        },
+        "networkvrancea_5km_4mag.txt": {
+            "Nodes": 264,
+            "Edges": 375,
+            "Mappings": 3,
+            "AvgMap": 10.0,
+            "Time": 0.0077016353607177734
+        }
+    },
+    "Tetrahedrons1": {
+        "networkvrancea_10km_1mag.txt": {
+            "Nodes": 536,
+            "Edges": 5048,
+            "Mappings": 119334,
+            "AvgMap": 37537.0,
+            "Time": 14.756927728652954
+        },
+        "networkvrancea_10km_2mag.txt": {
+            "Nodes": 519,
+            "Edges": 4960,
+            "Mappings": 118799,
+            "AvgMap": 72200.0,
+            "Time": 15.18755316734314
+        },
+        "networkvrancea_10km_3mag.txt": {
+            "Nodes": 320,
+            "Edges": 2534,
+            "Mappings": 37656,
+            "AvgMap": 18492.0,
+            "Time": 3.786654233932495
+        },
+        "networkvrancea_10km_4mag.txt": {
+            "Nodes": 113,
+            "Edges": 326,
+            "Mappings": 386,
+            "AvgMap": 109.0,
+            "Time": 0.05659914016723633
+        },
+        "networkvrancea_5km_1mag.txt": {
+            "Nodes": 1723,
+            "Edges": 7471,
+            "Mappings": 20498,
+            "AvgMap": 8170.0,
+            "Time": 4.514725208282471
+        },
+        "networkvrancea_5km_2mag.txt": {
+            "Nodes": 1684,
+            "Edges": 7383,
+            "Mappings": 20868,
+            "AvgMap": 8970.0,
+            "Time": 4.469801664352417
+        },
+        "networkvrancea_5km_3mag.txt": {
+            "Nodes": 983,
+            "Edges": 3721,
+            "Mappings": 8045,
+            "AvgMap": 2845.0,
+            "Time": 1.50966477394104
         },
         "networkvrancea_5km_4mag.txt": {
             "Nodes": 264,
             "Edges": 375,
             "Mappings": 3,
             "AvgMap": 0.0,
-            "Time": 0.00785684585571289
+            "Time": 0.022428035736083984
         }
     },
-    "Tetrahedrons": {
+    "Tetrahedrons2": {
         "networkvrancea_10km_1mag.txt": {
             "Nodes": 536,
             "Edges": 5048,
             "Mappings": 222023,
-            "AvgMap": 3960.0,
-            "Time": 13.399091482162476
+            "AvgMap": 5745.0,
+            "Time": 13.430341482162476
         },
         "networkvrancea_10km_2mag.txt": {
             "Nodes": 519,
             "Edges": 4960,
             "Mappings": 219656,
-            "AvgMap": 8985.0,
-            "Time": 13.574928998947144
+            "AvgMap": 11130.0,
+            "Time": 13.513904333114624
         },
         "networkvrancea_10km_3mag.txt": {
             "Nodes": 320,
             "Edges": 2534,
             "Mappings": 40418,
-            "AvgMap": 1895.0,
-            "Time": 2.1973509788513184
+            "AvgMap": 3125.0,
+            "Time": 2.201075792312622
         },
         "networkvrancea_10km_4mag.txt": {
             "Nodes": 113,
             "Edges": 326,
             "Mappings": 17,
             "AvgMap": 5.0,
-            "Time": 0.010222196578979492
+            "Time": 0.010592937469482422
         },
         "networkvrancea_5km_1mag.txt": {
             "Nodes": 1723,
             "Edges": 7471,
             "Mappings": 225,
             "AvgMap": 5.0,
-            "Time": 0.7373232841491699
+            "Time": 0.7410809993743896
         },
         "networkvrancea_5km_2mag.txt": {
             "Nodes": 1684,
             "Edges": 7383,
             "Mappings": 230,
             "AvgMap": 10.0,
-            "Time": 0.7226138114929199
+            "Time": 0.7382888793945312
         },
         "networkvrancea_5km_3mag.txt": {
             "Nodes": 983,
             "Edges": 3721,
             "Mappings": 100,
             "AvgMap": 0.0,
-            "Time": 0.22068095207214355
+            "Time": 0.22645974159240723
         },
         "networkvrancea_5km_4mag.txt": {
             "Nodes": 264,
             "Edges": 375,
             "Mappings": 0,
             "AvgMap": 0.0,
-            "Time": 0.00623011589050293
+            "Time": 0.006946563720703125
+        }
+    },
+    "Tetrahedrons3": {
+        "networkvrancea_10km_1mag.txt": {
+            "Nodes": 536,
+            "Edges": 5048,
+            "Mappings": 209344,
+            "AvgMap": 18921.0,
+            "Time": 35.112680435180664
+        },
+        "networkvrancea_10km_2mag.txt": {
+            "Nodes": 519,
+            "Edges": 4960,
+            "Mappings": 205123,
+            "AvgMap": 23650.0,
+            "Time": 35.17785716056824
+        },
+        "networkvrancea_10km_3mag.txt": {
+            "Nodes": 320,
+            "Edges": 2534,
+            "Mappings": 46391,
+            "AvgMap": 6688.0,
+            "Time": 6.6520304679870605
+        },
+        "networkvrancea_10km_4mag.txt": {
+            "Nodes": 113,
+            "Edges": 326,
+            "Mappings": 92,
+            "AvgMap": 5.0,
+            "Time": 0.02167034149169922
+        },
+        "networkvrancea_5km_1mag.txt": {
+            "Nodes": 1723,
+            "Edges": 7471,
+            "Mappings": 1625,
+            "AvgMap": 415.0,
+            "Time": 0.9721319675445557
+        },
+        "networkvrancea_5km_2mag.txt": {
+            "Nodes": 1684,
+            "Edges": 7383,
+            "Mappings": 1641,
+            "AvgMap": 235.0,
+            "Time": 0.9644601345062256
+        },
+        "networkvrancea_5km_3mag.txt": {
+            "Nodes": 983,
+            "Edges": 3721,
+            "Mappings": 846,
+            "AvgMap": 55.0,
+            "Time": 0.3307509422302246
+        },
+        "networkvrancea_5km_4mag.txt": {
+            "Nodes": 264,
+            "Edges": 375,
+            "Mappings": 0,
+            "AvgMap": 0.0,
+            "Time": 0.005487203598022461
+        }
+    },
+    "Tetrahedrons4": {
+        "networkvrancea_10km_1mag.txt": {
+            "Nodes": 536,
+            "Edges": 5048,
+            "Mappings": 0,
+            "AvgMap": 42817.0,
+            "Time": 96.46362042427063
+        },
+        "networkvrancea_10km_2mag.txt": {
+            "Nodes": 519,
+            "Edges": 4960,
+            "Mappings": 0,
+            "AvgMap": 31620.0,
+            "Time": 90.54407167434692
+        },
+        "networkvrancea_10km_3mag.txt": {
+            "Nodes": 320,
+            "Edges": 2534,
+            "Mappings": 0,
+            "AvgMap": 13520.0,
+            "Time": 17.587320566177368
+        },
+        "networkvrancea_10km_4mag.txt": {
+            "Nodes": 113,
+            "Edges": 326,
+            "Mappings": 0,
+            "AvgMap": 213.0,
+            "Time": 0.06757521629333496
+        },
+        "networkvrancea_5km_1mag.txt": {
+            "Nodes": 1723,
+            "Edges": 7471,
+            "Mappings": 0,
+            "AvgMap": 8897.0,
+            "Time": 4.7923264503479
+        },
+        "networkvrancea_5km_2mag.txt": {
+            "Nodes": 1684,
+            "Edges": 7383,
+            "Mappings": 0,
+            "AvgMap": 4957.0,
+            "Time": 4.578359365463257
+        },
+        "networkvrancea_5km_3mag.txt": {
+            "Nodes": 983,
+            "Edges": 3721,
+            "Mappings": 0,
+            "AvgMap": 1986.0,
+            "Time": 1.6635856628417969
+        },
+        "networkvrancea_5km_4mag.txt": {
+            "Nodes": 264,
+            "Edges": 375,
+            "Mappings": 0,
+            "AvgMap": 0.0,
+            "Time": 0.007674694061279297
+        }
+    },
+    "Tetrahedrons5": {
+        "networkvrancea_10km_1mag.txt": {
+            "Nodes": 536,
+            "Edges": 5048,
+            "Mappings": 2071114,
+            "AvgMap": 762274.0,
+            "Time": 103.94593286514282
+        },
+        "networkvrancea_10km_2mag.txt": {
+            "Nodes": 519,
+            "Edges": 4960,
+            "Mappings": 1970229,
+            "AvgMap": 1208880.0,
+            "Time": 104.67622089385986
+        },
+        "networkvrancea_10km_3mag.txt": {
+            "Nodes": 320,
+            "Edges": 2534,
+            "Mappings": 487378,
+            "AvgMap": 225860.0,
+            "Time": 22.42478322982788
+        },
+        "networkvrancea_10km_4mag.txt": {
+            "Nodes": 113,
+            "Edges": 326,
+            "Mappings": 7694,
+            "AvgMap": 3052.0,
+            "Time": 0.25764942169189453
+        },
+        "networkvrancea_5km_1mag.txt": {
+            "Nodes": 1723,
+            "Edges": 7471,
+            "Mappings": 1458544,
+            "AvgMap": 911626.0,
+            "Time": 59.75683569908142
+        },
+        "networkvrancea_5km_2mag.txt": {
+            "Nodes": 1684,
+            "Edges": 7383,
+            "Mappings": 1435329,
+            "AvgMap": 920733.0,
+            "Time": 59.13938641548157
+        },
+        "networkvrancea_5km_3mag.txt": {
+            "Nodes": 983,
+            "Edges": 3721,
+            "Mappings": 416553,
+            "AvgMap": 246941.0,
+            "Time": 16.657362699508667
+        },
+        "networkvrancea_5km_4mag.txt": {
+            "Nodes": 264,
+            "Edges": 375,
+            "Mappings": 1141,
+            "AvgMap": 1358.0,
+            "Time": 0.05437517166137695
+        }
+    },
+    "Tetrahedrons6": {
+        "networkvrancea_10km_1mag.txt": {
+            "Nodes": 536,
+            "Edges": 5048,
+            "Mappings": 1250554,
+            "AvgMap": 812086.0,
+            "Time": 138.79712748527527
+        },
+        "networkvrancea_10km_2mag.txt": {
+            "Nodes": 519,
+            "Edges": 4960,
+            "Mappings": 1187223,
+            "AvgMap": 915988.0,
+            "Time": 140.1110656261444
+        },
+        "networkvrancea_10km_3mag.txt": {
+            "Nodes": 320,
+            "Edges": 2534,
+            "Mappings": 279763,
+            "AvgMap": 174955.0,
+            "Time": 26.69734835624695
+        },
+        "networkvrancea_10km_4mag.txt": {
+            "Nodes": 113,
+            "Edges": 326,
+            "Mappings": 5217,
+            "AvgMap": 2227.0,
+            "Time": 0.28434324264526367
+        },
+        "networkvrancea_5km_1mag.txt": {
+            "Nodes": 1723,
+            "Edges": 7471,
+            "Mappings": 643865,
+            "AvgMap": 318828.0,
+            "Time": 45.98086762428284
+        },
+        "networkvrancea_5km_2mag.txt": {
+            "Nodes": 1684,
+            "Edges": 7383,
+            "Mappings": 632460,
+            "AvgMap": 633722.0,
+            "Time": 47.872827768325806
+        },
+        "networkvrancea_5km_3mag.txt": {
+            "Nodes": 983,
+            "Edges": 3721,
+            "Mappings": 213587,
+            "AvgMap": 66091.0,
+            "Time": 12.925560712814331
+        },
+        "networkvrancea_5km_4mag.txt": {
+            "Nodes": 264,
+            "Edges": 375,
+            "Mappings": 648,
+            "AvgMap": 216.0,
+            "Time": 0.04010272026062012
         }
     }
 }

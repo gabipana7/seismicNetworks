@@ -51,9 +51,9 @@ def totalMeanEnergyMotif(region,side,mag,motif,originalG,quakesDataFrame):
             meanEnergyInMotif.append(energyInNode/len(quakesInNode))
         
         # After computing for all the nodes of a Motif append to the dictionary the values of total and mean energy
-        if motif=='triangles':
+        if motif.startswith('Triangles'):
             energyMotif[str(motifs)]=[sum(energyInMotif),sum(meanEnergyInMotif)/3]
-        if motif=='squares':
+        if motif.startswith('Tetrahedrons'):
             energyMotif[str(motifs)]=[sum(energyInMotif),sum(meanEnergyInMotif)/4]
 
     return(motifNodes,energyMotif)
@@ -119,8 +119,6 @@ def areasInTriangles(motifNodes,energyMotif,originalG,quakesDataFrame):
             areasWeightMeanMag.append(AWeightMeanMag)
             
             
-            
-
     return(areasWeightTotalMag,areasWeightMeanMag)
 
 
