@@ -10,3 +10,4 @@ database.ini
 *.gexf
 *.svg
 *.json
+*.vtp
