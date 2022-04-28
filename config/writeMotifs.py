@@ -1,6 +1,6 @@
 import vtk
 
-def writeObjectsMotifs(nodeCoords,
+def writeNetworksMotifs(nodeCoords,
                  motifCoords=[],
                  edges = [],
                  scalar = [], name = '', power = 1,
@@ -49,25 +49,8 @@ def writeObjectsMotifs(nodeCoords,
                 triangles.InsertNextCell(triangle)  
 
 
-        # INITIALIZE TETRAHEDRONS
-        if len(motifCoords[0]) == 5:
-            tetrahedrons = vtk.vtkCellArray()
 
-            # Initialize the poins of tetrahedron
-
-            for motif in motifCoords:
-                tetra = vtk.vtkTetra()
-                    
-                tetra.GetPointIds().SetId(0,int(motif[0]))  
-                tetra.GetPointIds().SetId(1,int(motif[1])) 
-                tetra.GetPointIds().SetId(2,int(motif[2])) 
-                tetra.GetPointIds().SetId(3,int(motif[3]))
-
-                # Append the newly created tetra to the tetrahedrons
-                tetrahedrons.InsertNextCell(tetra)
-
-
-        # INITIALIZE TETRAHEDRONS BY HAND
+        # INITIALIZE TETRAHEDRONS 
         if len(motifCoords[0]) == 4:
             tetrahedrons = vtk.vtkCellArray()
 
@@ -95,6 +78,22 @@ def writeObjectsMotifs(nodeCoords,
                 triangle.GetPointIds().SetId(1,int(motif[0])) 
                 triangle.GetPointIds().SetId(2,int(motif[2])) 
                 tetrahedrons.InsertNextCell(triangle)
+
+
+        polydata = vtk.vtkPolyData()
+        polydata.SetPoints(points)
+#        polydata.SetVerts(vertices)
+
+        if motifCoords:
+            if len(motifCoords[0]) == 3:
+                polydata.SetPolys(triangles)
+            if len(motifCoords[0]) == 4:
+                polydata.SetPolys(tetrahedrons)
+            
+        writer = vtk.vtkXMLPolyDataWriter()
+        writer.SetFileName(fileout+'Only'+'.vtp')
+        writer.SetInputData(polydata)
+        writer.Write()
 
 
 
@@ -153,11 +152,11 @@ def writeObjectsMotifs(nodeCoords,
         polydata.SetPoints(points)
 #        polydata.SetVerts(vertices)
 
-        if motifCoords:
-            if len(motifCoords[0]) == 3:
-                polydata.SetPolys(triangles)
-            if len(motifCoords[0]) == 4:
-                polydata.SetPolys(tetrahedrons)
+        # if motifCoords:
+        #     if len(motifCoords[0]) == 3:
+        #         polydata.SetPolys(triangles)
+        #     if len(motifCoords[0]) == 4:
+        #         polydata.SetPolys(tetrahedrons)
             
         if edges:
             polydata.SetLines(lines)
@@ -177,31 +176,24 @@ def writeObjectsMotifs(nodeCoords,
         writer.Write()
 
 
-    elif method == 'vtkUnstructuredGrid':
-        # caution: ParaView's Tube filter does not work on vtkUnstructuredGrid
-        grid = vtk.vtkUnstructuredGrid()
-        grid.SetPoints(points)
+    # elif method == 'vtkUnstructuredGrid':
+    #     # caution: ParaView's Tube filter does not work on vtkUnstructuredGrid
+    #     grid = vtk.vtkUnstructuredGrid()
+    #     grid.SetPoints(points)
 
-        if motifCoords:
-#            if len(motifCoords[0]) == 3:
-#                grid.SetCells(triangles)
-            if len(motifCoords[0]) == 4:
-                grid.SetCells(vtk.VTK_TETRA,tetrahedrons)
-
-
-        if edges:
-            grid.SetCells(vtk.VTK_LINE, line)
-        if scalar:
-            grid.GetPointData().AddArray(attribute)
-        if scalar2:
-            grid.GetPointData().AddArray(attribute2)
-        if escalar:
-            grid.GetCellData().AddArray(eattribute)
-        if escalar2:
-            grid.GetCellData().AddArray(eattribute2)
-        if nodeLabel:
-            grid.GetPointData().AddArray(label)
-        writer = vtk.vtkXMLUnstructuredGridWriter()
-        writer.SetFileName(fileout+'.vtu')
-        writer.SetInputData(grid)
-        writer.Write()
+    #     if edges:
+    #         grid.SetCells(vtk.VTK_LINE, line)
+    #     if scalar:
+    #         grid.GetPointData().AddArray(attribute)
+    #     if scalar2:
+    #         grid.GetPointData().AddArray(attribute2)
+    #     if escalar:
+    #         grid.GetCellData().AddArray(eattribute)
+    #     if escalar2:
+    #         grid.GetCellData().AddArray(eattribute2)
+    #     if nodeLabel:
+    #         grid.GetPointData().AddArray(label)
+    #     writer = vtk.vtkXMLUnstructuredGridWriter()
+    #     writer.SetFileName(fileout+'.vtu')
+    #     writer.SetInputData(grid)
+    #     writer.Write()

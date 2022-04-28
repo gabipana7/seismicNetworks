@@ -5,7 +5,7 @@ import psycopg2
 import pandas as pd
 
 # Import the 'config' funtion from the config.py file
-from config import config
+from .config import config
 
 
 def getTable(sql_query):

@@ -6,8 +6,7 @@ import os
 import ast
 import numpy as np
 
-from writeNodesEdges import writeObjects
-from writeMotifs import writeObjectsMotifs
+from config.writeMotifs import writeNetworksMotifs
 
 
 # ---------------------------SETUP AND COLLECTION OF QUAKES------------------------------------#
@@ -23,7 +22,7 @@ mag = int(input('Select desired magnitude threshold - recommended = 4 : '))
 G = nx.read_gexf(f'./results/{region}/networks/view/network{region}_{side}km_{mag}mag.gexf')
 
 
-motif = input('Input motif: Triangles (for areas) / Tetrahedrons (for volumes) : ')
+motif = input('Input motif: Triangles (for areas) / Tetrahedrons 1/3 (for volumes) : ')
 
 
 #---------------------------------------MOTIFS-----------------------------------------#
@@ -116,16 +115,11 @@ os.chdir(f'./results/{region}/networksview')
 
 # Write the VTK file that goes in Paraview
 # The network
-writeObjects(nodeCoords=coords,
-             edges=G.edges(),
-             scalar=degree, name='degree',
-             scalar2=weights, name2='weight',
-             escalar2=motifs, ename2=motif,
-#             nodeLabel=nodeLabel,
-             fileout=f'network{region}_{side}km_{mag}mag_{motif}')
-
-# Only the motifs
-writeObjectsMotifs(nodeCoords=coords,
-             motifCoords=motifNodes,
-             fileout=f'network{region}_{side}km_{mag}mag_{motif}Only')
-
+writeNetworksMotifs(nodeCoords=coords,
+                motifCoords=motifNodes,
+                edges=G.edges(),
+                scalar=degree, name='degree',
+                scalar2=weights, name2='weight',
+                escalar2=motifs, ename2=motif,
+#               nodeLabel=nodeLabel,
+                fileout=f'network{region}_{side}km_{mag}mag_{motif}')
