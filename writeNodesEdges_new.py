@@ -29,29 +29,6 @@ def writeObjects(nodeCoords,
     for node in nodeCoords:
         points.InsertNextPoint(node)   
 
-    if motifCoords:
-        # INITIALIZE TRIANGLES
-        if len(motifCoords[0]) == 3:
-            triangles = vtk.vtkCellArray()
-    #        triangles.Allocate(len(motifCoords))
-
-            # Initialize the points for the triangle
-
-            for motif in motifCoords:
-                triangle = vtk.vtkTriangle()
-                
-                keys=[]
-                for nodeIdx in motif.keys():
-                    keys.append(nodeIdx)
-
-                    
-                triangle.GetPointIds().SetId(0,keys[0]-1)
-                triangle.GetPointIds().SetId(1,keys[1]-1)
-                triangle.GetPointIds().SetId(2,keys[2]-1)
-            
-                # Append the newly created triangle to the triangles
-                triangles.InsertNextCell(triangle)  
-
 
     # INITIALIZE THE EDGES
     if edges:
@@ -106,8 +83,6 @@ def writeObjects(nodeCoords,
         polydata = vtk.vtkPolyData()
         polydata.SetPoints(points)
 
-        if motifCoords:
-            polydata.SetPolys(triangles)
 
         if edges:
             polydata.SetLines(line)

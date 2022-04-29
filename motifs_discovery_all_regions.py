@@ -18,7 +18,7 @@ motifStats={}
 
 
 
-for motif in ['Triangles','Tetrahedrons1','Tetrahedrons2','Tetrahedrons3','Tetrahedrons4','Tetrahedrons5','Tetrahedrons6']:
+for motif in ['Triangles']:#,'Tetrahedrons1','Tetrahedrons2','Tetrahedrons3','Tetrahedrons4','Tetrahedrons5','Tetrahedrons6']:
 
     motifStats[motif]={}
 

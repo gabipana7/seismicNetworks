@@ -95,7 +95,6 @@ def graphCreation(quakes,withEdgeWeight=True):
 	
 	# Setup network attributes as dictionaries
 	# Only dictionaries are supported by networkx
-	quake_index = {}
 	quake_zDepth = {}
 	quake_yLongitude = {}
 	quake_xLatitude = {}
@@ -103,23 +102,11 @@ def graphCreation(quakes,withEdgeWeight=True):
 	# Turn the dataframe into a dictionary, the indexing quantity
 	#is the index of the quake ( the row value )
 	for index, row in quakes.iterrows():
-		
-		# Create a dictionary with cubeIndex : [ list of quake indexes ] (the quakes in that certain cube)
-		# if the cube has already been indexed
-		if row['cubeIndex'] in quake_index.keys():
-			# just add that event in the dictionary
-			quake_index[row['cubeIndex']].append(str(index))
-		# if not yet indexed
-		else:
-			# create that dictionary entry
-			quake_index[row['cubeIndex']]=[]
-			# and add that event in the dictionary
-			quake_index[row['cubeIndex']].append(str(index))
 			
 		# Create dictionaries for each dimension ( cubeIndex : dimension)
-		quake_zDepth[row['cubeIndex']] = str(row['zDepth'])
-		quake_yLongitude[row['cubeIndex']] = str(row['yLongitude'])
-		quake_xLatitude[row['cubeIndex']] = str(row['xLatitude'])
+		quake_zDepth[row['cubeIndex']] = row['zDepth']
+		quake_yLongitude[row['cubeIndex']] = row['yLongitude']
+		quake_xLatitude[row['cubeIndex']] = row['xLatitude']
 
 
 	nx.set_node_attributes(G, quake_zDepth, name='quake_zDepth')
@@ -203,9 +190,9 @@ def graphCreation3(quakes,withEdgeWeight=True):
 			quake_index[row['cubeIndex']].append(str(index))
 			
 		# Create dictionaries for each dimension ( cubeIndex : dimension)
-		quake_zDepth[row['cubeIndex']] = str(row['zDepth'])
-		quake_yLongitude[row['cubeIndex']] = str(row['yLongitude'])
-		quake_xLatitude[row['cubeIndex']] = str(row['xLatitude'])
+		quake_zDepth[row['cubeIndex']] = int(row['zDepth'])
+		quake_yLongitude[row['cubeIndex']] = int(row['yLongitude'])
+		quake_xLatitude[row['cubeIndex']] = int(row['xLatitude'])
 
 
 	nx.set_node_attributes(G, quake_zDepth, name='quake_zDepth')

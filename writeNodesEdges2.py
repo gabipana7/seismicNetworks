@@ -1,7 +1,7 @@
 import vtk
 
 def writeObjects(nodeCoords,
-                 motifCoords={},
+                 motifCoords=[],
                  edges = [],
                  scalar = [], name = '', power = 1,
                  scalar2 = [], name2 = '', power2 = 1,
@@ -26,8 +26,13 @@ def writeObjects(nodeCoords,
 
     # INITIALIZE THE NODES 
     points = vtk.vtkPoints()
+#   vertices = vtk.vtkCellArray()
     for node in nodeCoords:
-        points.InsertNextPoint(node)   
+#        point_id = points.InsertNextPoint(node)
+        points.InsertNextPoint(node)
+
+#        vertices.InsertNextCell(1)
+#        vertices.InsertCellPoint(point_id)
 
     if motifCoords:
         # INITIALIZE TRIANGLES
@@ -40,28 +45,75 @@ def writeObjects(nodeCoords,
             for motif in motifCoords:
                 triangle = vtk.vtkTriangle()
                 
-                keys=[]
-                for nodeIdx in motif.keys():
-                    keys.append(nodeIdx)
-
-                    
-                triangle.GetPointIds().SetId(0,keys[0]-1)
-                triangle.GetPointIds().SetId(1,keys[1]-1)
-                triangle.GetPointIds().SetId(2,keys[2]-1)
+                # Initialize the keys
+                
+                triangle.GetPointIds().SetId(0,int(motif[0]))
+                triangle.GetPointIds().SetId(1,int(motif[1]))
+                triangle.GetPointIds().SetId(2,int(motif[2]))
             
                 # Append the newly created triangle to the triangles
                 triangles.InsertNextCell(triangle)  
 
 
+        # INITIALIZE TETRAHEDRONS
+        if len(motifCoords[0]) == 5:
+            tetrahedrons = vtk.vtkCellArray()
+
+            # Initialize the poins of tetrahedron
+
+            for motif in motifCoords:
+                tetra = vtk.vtkTetra()
+                    
+                tetra.GetPointIds().SetId(0,int(motif[0]))  
+                tetra.GetPointIds().SetId(1,int(motif[1])) 
+                tetra.GetPointIds().SetId(2,int(motif[2])) 
+                tetra.GetPointIds().SetId(3,int(motif[3]))
+
+                # Append the newly created tetra to the tetrahedrons
+                tetrahedrons.InsertNextCell(tetra)
+
+
+        # INITIALIZE TETRAHEDRONS BY HAND
+        if len(motifCoords[0]) == 4:
+            tetrahedrons = vtk.vtkCellArray()
+
+            # Initialize the poins of tetrahedron
+
+            for motif in motifCoords:
+                triangle = vtk.vtkTriangle()
+                    
+                triangle.GetPointIds().SetId(0,int(motif[0]))  
+                triangle.GetPointIds().SetId(1,int(motif[1])) 
+                triangle.GetPointIds().SetId(2,int(motif[2])) 
+                tetrahedrons.InsertNextCell(triangle)
+
+                triangle.GetPointIds().SetId(0,int(motif[3]))  
+                triangle.GetPointIds().SetId(1,int(motif[0])) 
+                triangle.GetPointIds().SetId(2,int(motif[1])) 
+                tetrahedrons.InsertNextCell(triangle)
+
+                triangle.GetPointIds().SetId(0,int(motif[3]))  
+                triangle.GetPointIds().SetId(1,int(motif[1])) 
+                triangle.GetPointIds().SetId(2,int(motif[2])) 
+                tetrahedrons.InsertNextCell(triangle)
+
+                triangle.GetPointIds().SetId(0,int(motif[3]))  
+                triangle.GetPointIds().SetId(1,int(motif[0])) 
+                triangle.GetPointIds().SetId(2,int(motif[2])) 
+                tetrahedrons.InsertNextCell(triangle)
+
+
+
     # INITIALIZE THE EDGES
     if edges:
-        line = vtk.vtkCellArray()
-        line.Allocate(len(edges))
+        lines = vtk.vtkCellArray()
+        lines.Allocate(len(edges))
         for edge in edges:
-            line.InsertNextCell(2)
-            line.InsertCellPoint(edge[0])
-            line.InsertCellPoint(edge[1])   # line from point edge[0] to point edge[1]
-
+            line = vtk.vtkLine()
+            line.GetPointIds().SetId(0,edge[0])  
+            line.GetPointIds().SetId(1,edge[1])  # line from point edge[0] to point edge[1]
+            lines.InsertNextCell(line)
+  
     if scalar:
         attribute = vtk.vtkFloatArray()
         attribute.SetNumberOfComponents(1)
@@ -96,7 +148,7 @@ def writeObjects(nodeCoords,
 
 
     if nodeLabel:
-        label = vtk.vtkFloatArray()
+        label = vtk.vtkStringArray()
         label.SetName('tag')
         label.SetNumberOfValues(len(nodeLabel))
         for i, j in enumerate(nodeLabel):   # i becomes 0,1,2,..., and j runs through scalar
@@ -105,12 +157,16 @@ def writeObjects(nodeCoords,
     if method == 'vtkPolyData':
         polydata = vtk.vtkPolyData()
         polydata.SetPoints(points)
+#        polydata.SetVerts(vertices)
 
         if motifCoords:
-            polydata.SetPolys(triangles)
-
+            if len(motifCoords[0]) == 3:
+                polydata.SetPolys(triangles)
+            if len(motifCoords[0]) == 4:
+                polydata.SetPolys(tetrahedrons)
+            
         if edges:
-            polydata.SetLines(line)
+            polydata.SetLines(lines)
         if scalar:
             polydata.GetPointData().AddArray(attribute)
         if scalar2:
@@ -125,10 +181,20 @@ def writeObjects(nodeCoords,
         writer.SetFileName(fileout+'.vtp')
         writer.SetInputData(polydata)
         writer.Write()
+
+
     elif method == 'vtkUnstructuredGrid':
         # caution: ParaView's Tube filter does not work on vtkUnstructuredGrid
         grid = vtk.vtkUnstructuredGrid()
         grid.SetPoints(points)
+
+        if motifCoords:
+#            if len(motifCoords[0]) == 3:
+#                grid.SetCells(triangles)
+            if len(motifCoords[0]) == 4:
+                grid.SetCells(vtk.VTK_TETRA,tetrahedrons)
+
+
         if edges:
             grid.SetCells(vtk.VTK_LINE, line)
         if scalar:
