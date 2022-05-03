@@ -51,6 +51,8 @@ def makeCubes(table,region,side=5,energyRelease=False):
     y = round((maxLong-minLong)*longitudeInKm / side)
     z = round((maxDepth-minDepth) / side)
 
+    maxDim = max(x,y,z)
+
     # Create cubes indexes for all the dimensions 
     xLatitude = [int(np.floor((i-minLat)*x/(maxLat-minLat))+1) for i in latitude]
     yLongitude = [int(np.floor((i-minLong)*y/(maxLong-minLong))+1) for i in longitude]
@@ -58,8 +60,7 @@ def makeCubes(table,region,side=5,energyRelease=False):
     cubeIndex=[]
     # and a general cubeindex for graph formation
     for i in range(len(xLatitude)):
-        cubeIndex.append(int(str(xLatitude[i])+str(yLongitude[i])+str(zDepth[i])))
-        #cubeIndex.append((xLatitude[i]-1)*x+(yLongitude[i]-1)*y+zDepth[i])
+        cubeIndex.append(maxDim*maxDim*(xLatitude[i]-1)+maxDim*(yLongitude[i]-1)+zDepth[i])
 
     table['xLatitude']=xLatitude
     table['yLongitude']=yLongitude

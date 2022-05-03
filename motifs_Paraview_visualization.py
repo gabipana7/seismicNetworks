@@ -92,12 +92,22 @@ maxDepth = max(depth)
 maxDimension = max(maxLat,maxLong,maxDepth)
 
 
+# Depth enhancer for proper visualization in regions where quakes are more surface
+depthEnhancer = 1
+
+# For California, split the quakes apart to see them better 
+if region == 'california':
+    depthEnhancer = 15
+
+# Coordinates of the nodes for Paraview VTK (must be betweeen 0 and 1)
 coords=[]
 for n in G.nodes():
     coords.append([ np.float32(round((int(G.nodes[n]['quake_xLatitude']) - minLat)*(maxLat/maxDimension)/(maxLat-minLat),3)),
                     np.float32(round((int(G.nodes[n]['quake_yLongitude']) - minLong)*(maxLong/maxDimension)/(maxLong-minLong),3)),
-                    np.float32(round((int(G.nodes[n]['quake_zDepth']) - minDepth)*(maxDepth/maxDimension)/(maxDepth-minDepth),3))])
+                    # The depth enhancer to proper view is at maxDepth*depthEnhancer
+                    np.float32(round((int(G.nodes[n]['quake_zDepth']) - minDepth)*(maxDepth*depthEnhancer/maxDimension)/(maxDepth-minDepth),3))])
   
+
 # Degree of nodes edges    
 degree = [d for n, d in G.degree()]
 

@@ -21,6 +21,7 @@ def getTable(sql_query):
 
     # Utilize the create_pandas_table function to create a Pandas data frame
     # Store the data as a variable
+    # Will issue a warning, but it works 
     quakes = pd.read_sql_query(sql_query, conn)
     
     # Close the cursor and connection to so the server can allocate
