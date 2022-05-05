@@ -12,3 +12,4 @@ database.ini
 *.json
 *.vtp
 *.pvsm
+*.xml

@@ -20,10 +20,10 @@ side = int(input('Input side of the cube split in km 5 / 10 / 20 - recommended =
 # Select desired magnitude threshold
 mag = int(input('Select desired magnitude threshold - recommended = 4 : '))
 
-G = nx.read_gexf(f'./results/{region}/networks/view/network{region}_{side}km_{mag}mag.gexf')
+#G = nx.read_gexf(f'./results/{region}/networks/view/network{region}_{side}km_{mag}mag.gexf')
+G = nx.read_graphml(f'./results/{region}/networks/view/network{region}_{side}km_{mag}mag.xml')
 
-G = nx.convert_node_labels_to_integers(G, first_label=1)
-
+G = nx.convert_node_labels_to_integers(G,first_label=1)
 
 motif = input('Input motif: Triangles (for areas) / Tetrahedrons 1/3 (for volumes) : ')
 
@@ -75,52 +75,70 @@ for (u,v) in H.edges():
 # Get attributes that go into VTK function
 
 # X Y Z coords
-lat =[]
-long = []
-depth =[]
-for n in G.nodes():
-    lat.append(int(G.nodes[n]['quake_xLatitude']))
-    long.append(int(G.nodes[n]['quake_yLongitude']))
-    depth.append(int(G.nodes[n]['quake_zDepth']))
 
-minLat = min(lat)
-maxLat = max(lat)
-minLong = min(long)
-maxLong = max(long)
-minDepth = min(depth)
-maxDepth = max(depth)
-maxDimension = max(maxLat,maxLong,maxDepth)
-
+# lat =[]
+# long = []
+# depth =[]
+# for n in G.nodes():
+#     lat.append(int(G.nodes[n]['quake_xLatitude']))
+#     long.append(int(G.nodes[n]['quake_yLongitude']))
+#     depth.append(int(G.nodes[n]['quake_zDepth']))
 
 # Depth enhancer for proper visualization in regions where quakes are more surface
 depthEnhancer = 1
-
-# For California, split the quakes apart to see them better 
 if region == 'california':
-    depthEnhancer = 15
+     depthEnhancer = 15
 
-# Coordinates of the nodes for Paraview VTK (must be betweeen 0 and 1)
 coords=[]
 for n in G.nodes():
-    coords.append([ np.float32(round((int(G.nodes[n]['quake_xLatitude']) - minLat)*(maxLat/maxDimension)/(maxLat-minLat),3)),
-                    np.float32(round((int(G.nodes[n]['quake_yLongitude']) - minLong)*(maxLong/maxDimension)/(maxLong-minLong),3)),
-                    # The depth enhancer to proper view is at maxDepth*depthEnhancer
-                    np.float32(round((int(G.nodes[n]['quake_zDepth']) - minDepth)*(maxDepth*depthEnhancer/maxDimension)/(maxDepth-minDepth),3))])
+    coords.append([float(G.nodes[n]['quake_xLatitude']),
+                    float(G.nodes[n]['quake_yLongitude']),
+                    float(G.nodes[n]['quake_zDepth'])*depthEnhancer])
+
+# minLat = min(lat)
+# maxLat = max(lat)
+# minLong = min(long)
+# maxLong = max(long)
+# minDepth = min(depth)
+# maxDepth = max(depth)
+# maxDimension = max(maxLat,maxLong,maxDepth)
+
+
+# # Depth enhancer for proper visualization in regions where quakes are more surface
+# depthEnhancer = 1
+
+# # For California, split the quakes apart to see them better 
+# if region == 'california':
+#     depthEnhancer = 15
+
+# # Coordinates of the nodes for Paraview VTK (must be betweeen 0 and 1)
+# coords=[]
+# for n in G.nodes():
+#     coords.append([ np.float32(round((int(G.nodes[n]['quake_xLatitude']) - minLat)*(maxLat/maxDimension)/(maxLat-minLat),3)),
+#                     np.float32(round((int(G.nodes[n]['quake_yLongitude']) - minLong)*(maxLong/maxDimension)/(maxLong-minLong),3)),
+#                     # The depth enhancer to proper view is at maxDepth*depthEnhancer
+#                     np.float32(round((int(G.nodes[n]['quake_zDepth']) - minDepth)*(maxDepth*depthEnhancer/maxDimension)/(maxDepth-minDepth),3))])
   
+
 
 # Degree of nodes edges    
 degree = [d for n, d in G.degree()]
+
 
 # Weight of edges
 weights = []
 for (i,j) in G.edges():
     weights.append(G[i][j]['weight'])
-    
+
+
 # Triangle quality of edges
 motifs = []
 for (i,j) in G.edges():
     motifs.append(G[i][j][motif])
 
+#label=[]
+#for n in G.nodes():
+#    label.append(str(n))
 
 
 if not os.path.exists(f'./results/{region}/networksview'):
@@ -132,13 +150,13 @@ os.chdir(f'./results/{region}/networksview')
 # Write the VTK file that goes in Paraview
 # The network
 writeNetworksMotifs(nodeCoords=coords,
-                motifCoords=motifNodes,
+#                motifCoords=motifNodes,
                 edges=G.edges(),
-                scalar=degree, name='degree',
-                scalar2=weights, name2='weight',
-                escalar2=motifs, ename2=motif,
-#               nodeLabel=nodeLabel,
-                fileout=f'network{region}_{side}km_{mag}mag_{motif}')
+#                scalar=degree, name='degree',
+#                escalar=weights, ename='weight',
+#                escalar2=motifs, ename2=motif,
+#                nodeLabel=nodeLabel,
+                fileout=f'network{region}_{side}km_{mag}mag_{motif}_test')
 
 
 # writeObjects(nodeCoords=coords,
@@ -150,17 +168,17 @@ writeNetworksMotifs(nodeCoords=coords,
 #                 fileout=f'network{region}_{side}km_{mag}mag_{motif}2')
 
 
-# from writeNodesEdges import writeObjects
+from writeNodesEdges import writeObjects
 
-# writeObjects(nodeCoords=coords,
-#              edges=G.edges(),
-#              scalar=degree, name='degree',
-#              scalar2=weights, name2='weight',
-#              escalar2=motifs, ename2=motif,
-# #             nodeLabel=nodeLabel,
-#              fileout=f'network{region}Motifs_{side}km_{mag}mag_triangles')
+writeObjects(nodeCoords=coords,
+             edges=G.edges(),
+             scalar=degree, name='degree',
+             escalar=weights, ename='weight',
+             escalar2=motifs, ename2=motif,
+#             nodeLabel=nodeLabel,
+             fileout=f'network{region}Motifs_{side}km_{mag}mag_triangles')
 
-# from writeNodesEdges2 import writeObjects
+# from writeNodesEdges2 import writeObjectsMotif
 
 # writeObjects(nodeCoords=coords,
 #              motifCoords=motifNodes,
