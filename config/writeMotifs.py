@@ -1,7 +1,7 @@
 import vtk
 
 def writeNetworksMotifs(nodeCoords,
-#                 motifCoords=[],
+                 motifCoords=[],
                  edges = [],
                  scalar = [], name = '', power = 1,
                  scalar2 = [], name2 = '', power2 = 1,
@@ -134,68 +134,68 @@ def writeNetworksMotifs(nodeCoords,
     #     writer.Write()
 
 
-    #     if motifCoords:
-    #         # INITIALIZE TRIANGLES
-    #         if len(motifCoords[0]) == 3:
-    #             triangles = vtk.vtkCellArray()
+    if motifCoords:
+        # INITIALIZE TRIANGLES
+        if len(motifCoords[0]) == 3:
+            triangles = vtk.vtkCellArray()
 
-    #             # Initialize the points for the triangle
+            # Initialize the points for the triangle
 
-    #             for motif in motifCoords:
-    #                 triangle = vtk.vtkTriangle()
-                    
-    #                 # Initialize the keys
-                    
-    #                 triangle.GetPointIds().SetId(0,int(motif[0]))
-    #                 triangle.GetPointIds().SetId(1,int(motif[1]))
-    #                 triangle.GetPointIds().SetId(2,int(motif[2]))
+            for motif in motifCoords:
+                triangle = vtk.vtkTriangle()
                 
-    #                 # Append the newly created triangle to the triangles
-    #                 triangles.InsertNextCell(triangle)  
-
-
-
-    #         # INITIALIZE TETRAHEDRONS 
-    #         if len(motifCoords[0]) == 4:
-    #             tetrahedrons = vtk.vtkCellArray()
-
-    #             # Initialize the poins of tetrahedron
-
-    #             for motif in motifCoords:
-    #                 triangle = vtk.vtkTriangle()
-                        
-    #                 triangle.GetPointIds().SetId(0,int(motif[0]))  
-    #                 triangle.GetPointIds().SetId(1,int(motif[1])) 
-    #                 triangle.GetPointIds().SetId(2,int(motif[2])) 
-    #                 tetrahedrons.InsertNextCell(triangle)
-
-    #                 triangle.GetPointIds().SetId(0,int(motif[3]))  
-    #                 triangle.GetPointIds().SetId(1,int(motif[0])) 
-    #                 triangle.GetPointIds().SetId(2,int(motif[1])) 
-    #                 tetrahedrons.InsertNextCell(triangle)
-
-    #                 triangle.GetPointIds().SetId(0,int(motif[3]))  
-    #                 triangle.GetPointIds().SetId(1,int(motif[1])) 
-    #                 triangle.GetPointIds().SetId(2,int(motif[2])) 
-    #                 tetrahedrons.InsertNextCell(triangle)
-
-    #                 triangle.GetPointIds().SetId(0,int(motif[3]))  
-    #                 triangle.GetPointIds().SetId(1,int(motif[0])) 
-    #                 triangle.GetPointIds().SetId(2,int(motif[2])) 
-    #                 tetrahedrons.InsertNextCell(triangle)
-
-
-    #         polydata2 = vtk.vtkPolyData()
-    #         polydata2.SetPoints(points)
-    # #        polydata.SetVerts(vertices)
-
-    #         if motifCoords:
-    #             if len(motifCoords[0]) == 3:
-    #                 polydata2.SetPolys(triangles)
-    #             if len(motifCoords[0]) == 4:
-    #                 polydata2.SetPolys(tetrahedrons)
+                # Initialize the keys
                 
-    #         writer = vtk.vtkXMLPolyDataWriter()
-    #         writer.SetFileName(fileout+'Only'+'.vtp')
-    #         writer.SetInputData(polydata2)
-    #         writer.Write()
+                triangle.GetPointIds().SetId(0,int(motif[0]))
+                triangle.GetPointIds().SetId(1,int(motif[1]))
+                triangle.GetPointIds().SetId(2,int(motif[2]))
+            
+                # Append the newly created triangle to the triangles
+                triangles.InsertNextCell(triangle)  
+
+
+
+        # INITIALIZE TETRAHEDRONS 
+        if len(motifCoords[0]) == 4:
+            tetrahedrons = vtk.vtkCellArray()
+
+            # Initialize the poins of tetrahedron
+
+            for motif in motifCoords:
+                triangle = vtk.vtkTriangle()
+                    
+                triangle.GetPointIds().SetId(0,int(motif[0]))  
+                triangle.GetPointIds().SetId(1,int(motif[1])) 
+                triangle.GetPointIds().SetId(2,int(motif[2])) 
+                tetrahedrons.InsertNextCell(triangle)
+
+                triangle.GetPointIds().SetId(0,int(motif[3]))  
+                triangle.GetPointIds().SetId(1,int(motif[0])) 
+                triangle.GetPointIds().SetId(2,int(motif[1])) 
+                tetrahedrons.InsertNextCell(triangle)
+
+                triangle.GetPointIds().SetId(0,int(motif[3]))  
+                triangle.GetPointIds().SetId(1,int(motif[1])) 
+                triangle.GetPointIds().SetId(2,int(motif[2])) 
+                tetrahedrons.InsertNextCell(triangle)
+
+                triangle.GetPointIds().SetId(0,int(motif[3]))  
+                triangle.GetPointIds().SetId(1,int(motif[0])) 
+                triangle.GetPointIds().SetId(2,int(motif[2])) 
+                tetrahedrons.InsertNextCell(triangle)
+
+
+        polydata2 = vtk.vtkPolyData()
+        polydata2.SetPoints(points)
+#        polydata.SetVerts(vertices)
+
+
+        if len(motifCoords[0]) == 3:
+            polydata2.SetPolys(triangles)
+        if len(motifCoords[0]) == 4:
+            polydata2.SetPolys(tetrahedrons)
+            
+        writer = vtk.vtkXMLPolyDataWriter()
+        writer.SetFileName(fileout+'Only'+'.vtp')
+        writer.SetInputData(polydata2)
+        writer.Write()

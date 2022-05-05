@@ -21,6 +21,8 @@ side = int(input('Input side of the cube split in km 5 / 10 / 20 - recommended =
 mag = int(input('Select desired magnitude threshold - recommended = 4 : '))
 
 #G = nx.read_gexf(f'./results/{region}/networks/view/network{region}_{side}km_{mag}mag.gexf')
+
+
 G = nx.read_graphml(f'./results/{region}/networks/view/network{region}_{side}km_{mag}mag.xml')
 
 G = nx.convert_node_labels_to_integers(G,first_label=1)
@@ -60,11 +62,14 @@ else:
     
 #H = nx.convert_node_labels_to_integers(H, first_label=1)
 
+
 # Set the triangle attribute = 0 to each edge
 nx.set_edge_attributes(G, 0, name=motif)
 
+if region == 'vrancea' and side == '5' and mag == '4':
+    G.remove_node(200)
+    G = nx.convert_node_labels_to_integers(G,first_label=1)
 
-#G = nx.convert_node_labels_to_integers(G,first_label=1)
 
 # Iterate through our triangle only network edges
 for (u,v) in H.edges():
@@ -150,13 +155,13 @@ os.chdir(f'./results/{region}/networksview')
 # Write the VTK file that goes in Paraview
 # The network
 writeNetworksMotifs(nodeCoords=coords,
-#                motifCoords=motifNodes,
+                motifCoords=motifNodes,
                 edges=G.edges(),
-#                scalar=degree, name='degree',
-#                escalar=weights, ename='weight',
-#                escalar2=motifs, ename2=motif,
+                scalar=degree, name='degree',
+                escalar=weights, ename='weight',
+                escalar2=motifs, ename2=motif,
 #                nodeLabel=nodeLabel,
-                fileout=f'network{region}_{side}km_{mag}mag_{motif}_test')
+                fileout=f'network{region}_{side}km_{mag}mag_{motif}')
 
 
 # writeObjects(nodeCoords=coords,
@@ -168,15 +173,15 @@ writeNetworksMotifs(nodeCoords=coords,
 #                 fileout=f'network{region}_{side}km_{mag}mag_{motif}2')
 
 
-from writeNodesEdges import writeObjects
+# from writeNodesEdges import writeObjects
 
-writeObjects(nodeCoords=coords,
-             edges=G.edges(),
-             scalar=degree, name='degree',
-             escalar=weights, ename='weight',
-             escalar2=motifs, ename2=motif,
-#             nodeLabel=nodeLabel,
-             fileout=f'network{region}Motifs_{side}km_{mag}mag_triangles')
+# writeObjects(nodeCoords=coords,
+#              edges=G.edges(),
+#              scalar=degree, name='degree',
+#              escalar=weights, ename='weight',
+#              escalar2=motifs, ename2=motif,
+# #             nodeLabel=nodeLabel,
+#              fileout=f'network{region}Motifs_{side}km_{mag}mag_triangles')
 
 # from writeNodesEdges2 import writeObjectsMotif
 

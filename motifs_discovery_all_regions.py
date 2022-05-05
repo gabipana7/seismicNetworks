@@ -3,23 +3,23 @@ import json
 import os
 
 
-# # function to add to JSON
-# def write_json(new_data, path):
-#     with open(path,'r+') as file:
-#           # First we load existing data into a dict.
-#         file_data = json.load(file)
-#         # Join new_data with file_data inside emp_details
-#         file_data[motif].append(new_data)
-#         # Sets file's current position at offset.
-#         file.seek(0)
-#         # convert back to json.
-#         json.dump(file_data, file, indent = 4)
+# function to add to JSON
+def write_json(path,new_data,inputName,motif):
+    with open(path,'r+') as file:
+          # First we load existing data into a dict.
+        file_data = json.load(file)
+        # Join new_data with file_data inside emp_details
+        file_data[motif][inputName] = new_data
+        # Sets file's current position at offset.
+        file.seek(0)
+        # convert back to json.
+        json.dump(file_data, file, indent = 4)
 
 
-# function to write json files
-def write_json(path, data, indent=4):
-    with open(path, 'a') as file: 
-        json.dump(data, file, indent=indent) 
+# # function to write json files
+# def write_json(path, data, indent=4):
+#     with open(path, 'a') as file: 
+#         json.dump(data, file, indent=indent) 
 
 
 # For which region networks do you want to discover motifs ?
@@ -50,6 +50,27 @@ if not os.path.exists(f'./motifs'):
     os.makedirs(f'motifs')
 
 
+
+statsPath = f"./motifs/motifsStats_{region}.json"
+
+file_exists = os.path.exists(statsPath)
+
+
+if file_exists:
+    with open(statsPath, 'r+') as file:
+        file_data = json.load(file)
+        file_data[motif] = {}
+        file.seek(0)
+        json.dump(file_data, file, indent = 4)
+else:
+     with open(statsPath, 'a+') as file:
+        json.dump({motif:{}}, file, indent=4)
+
+
+        
+    
+
+
 # THE STATS ARE NOT CORRECT. THINK LATER
 
 if region == 'vrancea':
@@ -66,7 +87,10 @@ if region == 'vrancea':
 
             #motifStats[motif].append({inputName=stats})
 
-            write_json(f"./motifs/motifs{motif}Stats_{region}.json", {inputName:stats})
+            write_json(statsPath, stats, inputName, motif)
+
+    os.chdir(initialdir)
+
 
 
 elif region == 'japan':
@@ -82,7 +106,7 @@ elif region == 'japan':
 
                 #motifStats[motif][inputName]=stats
 
-                write_json(f"./motifs/motifs{motif}Stats_{region}.json", {inputName:stats})
+                write_json(statsPath, stats, inputName, motif)
 
         else:
             # Select desired magnitude filter 
@@ -93,10 +117,10 @@ elif region == 'japan':
 
                 #motifStats[motif][inputName]=stats
 
-                write_json(f"./motifs/motifs{motif}Stats_{region}.json", {inputName:stats})
+                write_json(statsPath, stats, inputName, motif)
 
 
-    #os.chdir(initialdir)
+    os.chdir(initialdir)
 
 
 #elif region == 'california' or region == 'italy':
@@ -115,7 +139,7 @@ else:
 
                 #motifStats[motif][inputName]=stats
 
-                write_json(f"./motifs/motifs{motif}Stats_{region}.json", {inputName:stats})
+                write_json(statsPath, stats, inputName, motif)
     
         #os.chdir(initialdir)
 
@@ -130,7 +154,7 @@ else:
 
                 #motifStats[motif][inputName]=stats
 
-                write_json(f"./motifs/motifs{motif}Stats_{region}.json", {inputName:stats})
+                write_json(statsPath, stats, inputName, motif)
 
         #os.chdir(initialdir)
 

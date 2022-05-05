@@ -59,20 +59,23 @@ def graphCreation(quakes,withEdgeWeight=True):
 	nx.set_node_attributes(G, quake_xLatitude, name='quake_xLatitude')
 
 
-	# Relabel the nodes
-	nodeList=[]
-	for n in G.nodes():
-		nodeList.append(n)
+	G = nx.convert_node_labels_to_integers(G,first_label=1)
 
-	# Create the mapping : dict with {G node value} : 
-	#new value ( from 1 to n = len of G nodes )    
-	mapping = {}
-	for i in range(len(nodeList)):
-		# i+1 to create from 1 to n ( not from 0 ) 
-		mapping[nodeList[i]] = i+1
 
-	# Create new graph with relabeled nodes
-	G = nx.relabel_nodes(G, mapping)
+	# # Relabel the nodes
+	# nodeList=[]
+	# for n in G.nodes():
+	# 	nodeList.append(n)
+
+	# # Create the mapping : dict with {G node value} : 
+	# #new value ( from 1 to n = len of G nodes )    
+	# mapping = {}
+	# for i in range(len(nodeList)):
+	# 	# i+1 to create from 1 to n ( not from 0 ) 
+	# 	mapping[nodeList[i]] = i+1
+
+	# # Create new graph with relabeled nodes
+	# G = nx.relabel_nodes(G, mapping)
 
 	return(G)
 
