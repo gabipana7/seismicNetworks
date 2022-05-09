@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
-from sqlcollect import getTable
-from seismicZones import query
+from config.sqlcollect import getTable
+from config.seismicZones import query
 from visualization import visualize
 
 
