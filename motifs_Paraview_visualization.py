@@ -7,7 +7,7 @@ import ast
 import numpy as np
 
 from config.writeMotifs import writeNetworksMotifs
-from writeNodesEdges import writeObjects
+#from writeNodesEdges import writeObjects
 
 
 # ---------------------------SETUP AND COLLECTION OF QUAKES------------------------------------#

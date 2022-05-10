@@ -1,5 +1,4 @@
 # Import libraries
-import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.image as mpimg
@@ -26,14 +25,14 @@ def visualize(quakes,region,withMap=False,mapcoords={}):
 	mean = int(quakes['magnitude'].mean())
 	max1 = int(quakes['magnitude'].max())
 	min1 = int(quakes['magnitude'].min())
-	magnitudesScale=[((x-mean)/(max1-min1))*150 for x in quakes['magnitude']]
+	magnitudesScale=[((x-mean)/(max1-min1))*250 for x in quakes['magnitude']]
 	# ----------------------------------------------------------------------------------------------#
 
 
 	# ----------------------------------------PLOTS------------------------------------------------#
 	# 3D Scatter plot of earthquakes locations
 	# Initialize figure and 3D axes
-	fig = plt.figure(figsize=(10,10))
+	fig = plt.figure(figsize=(20,20))
 	ax = Axes3D(fig,auto_add_to_figure=False)
 	fig.add_axes(ax)
 	ax.set_proj_type('ortho')
@@ -44,14 +43,14 @@ def visualize(quakes,region,withMap=False,mapcoords={}):
 			edgecolor='black', linewidth=0.2, alpha=0.8)
 
 	# Label the axes
-	ax.set_xlabel(r'$\mathbf{Longitude}$', fontsize=20, fontweight='bold',labelpad=25)
-	ax.set_ylabel(r'$\mathbf{Latitude}$',fontsize=20, fontweight='bold',labelpad=25)
-	ax.set_zlabel(r'$\mathbf{Depth}$', fontsize=20, fontweight='bold',labelpad=20)
+	ax.set_xlabel(r'$\mathbf{Longitude}$', fontsize=30, fontweight='bold',labelpad=50)
+	ax.set_ylabel(r'$\mathbf{Latitude}$',fontsize=30, fontweight='bold',labelpad=50)
+	ax.set_zlabel(r'$\mathbf{Depth}$', fontsize=30, fontweight='bold',labelpad=50)
 
 	plt.rcParams['text.usetex'] = True
-	plt.setp(ax.get_xticklabels(), fontsize=16)
-	plt.setp(ax.get_yticklabels(), fontsize=16)
-	plt.setp(ax.get_zticklabels(), fontsize=16)
+	plt.setp(ax.get_xticklabels(), fontsize=26)
+	plt.setp(ax.get_yticklabels(), fontsize=26)
+	plt.setp(ax.get_zticklabels(), fontsize=26)
 
 
 
@@ -63,12 +62,13 @@ def visualize(quakes,region,withMap=False,mapcoords={}):
 	#ax.view_init(elev=60, azim=225)
 	#ax.dist=11
 
-	ax.tick_params(axis='both', which='major', pad=7)
+	ax.tick_params(axis='both', which='major', pad=15)
 
 	# Show the colorbar used on the magnitude scale
 	cbar = fig.colorbar(im, ax=ax, orientation='vertical',fraction=0.046, pad=0.12, shrink=0.65)
 	# Label the colorbar
-	cbar.set_label(r'$\mathbf{Magnitude}$',fontsize=20, fontweight='bold',labelpad=15)
+	cbar.set_label(r'$\mathbf{Magnitude}$',fontsize=30, fontweight='bold',labelpad=30)
+	cbar.ax.tick_params(labelsize=26)
 	#cbar.ax.yaxis.set_label_position('left')
 
 
