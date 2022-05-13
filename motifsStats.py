@@ -13,6 +13,14 @@ from config.network import graphCreation3
 
 from motifs_areasVolumesEnergy import*
 
+
+# For which region networks do you want to analyze motifs ?
+region = input('Input region : vrancea / romania / california / italy / japan : ')
+
+# What motifs do you want to discover ?
+motif = input('Input motif: Triangles (for areas) / Tetrahedrons (for volumes) : ')
+
+
 # For which region networks do you want to analyze motifs ?
 region = 'italy'
 
