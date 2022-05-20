@@ -110,7 +110,7 @@ elif region == 'japan':
 
         else:
             # Select desired magnitude filter 
-            for mag in (5,4):
+            for mag in (3,4,5):
 
                 inputName = f'network{region}_{side}km_{mag}mag.txt'
                 stats = getMotif(inputName,motif,queryGraph)

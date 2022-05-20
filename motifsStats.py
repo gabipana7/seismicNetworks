@@ -21,21 +21,23 @@ region = input('Input region : vrancea / romania / california / italy / japan : 
 motif = input('Input motif: Triangles (for areas) / Tetrahedrons (for volumes) : ')
 
 
-# For which region networks do you want to analyze motifs ?
-region = 'italy'
+# # For which region networks do you want to analyze motifs ?
+# region = 'italy'
 
-# What motifs do you want to discover ?
-motif = 'Triangles'
+# # What motifs do you want to discover ?
+# motif = 'Tetrahedrons1'
 
 
 if not os.path.exists(f'./results/{region}/motifStatistics'):
     os.makedirs(f'results/{region}/motifStatistics')
 
 
+plt.rcParams['text.usetex'] = True
+
 sql_query= query(region)
 
 
-for mag in (2,3):
+for mag in (3,5):
     
     # Magnitude windows for the condition that collects the database through mySQL
     sql_query+=f" AND magnitude>={mag}"
@@ -49,6 +51,9 @@ for mag in (2,3):
 
         # Make the Cubes
         quakes = makeCubes(quakes,region,side,energyRelease=True)
+
+        # Get maximum magnitude for displaying on the plot
+        realmagMax = max(quakes['magnitude'])
 
         # Make the network
         quakesGraph = graphCreation3(quakes)
@@ -113,7 +118,7 @@ for mag in (2,3):
 
             #r'$\mathbf{Longitude}$'
 
-            plt.rcParams['text.usetex'] = True
+            
             plt.setp(ax.get_xticklabels(), fontsize=26)
             plt.setp(ax.get_yticklabels(), fontsize=26)
 
@@ -121,7 +126,12 @@ for mag in (2,3):
             ax.tick_params(axis='both', which='major', pad=7)
 
             # Title of connectivity distribution ( data + fit )
-            ax.set_title(f'cube size = {side} km ', fontsize=26, fontweight='bold')
+            #ax.set_title(f'cube size = {side} km ', fontsize=26, fontweight='bold')
+
+            # Magnitude range:
+            ax.text(0.05,0.1, f'Magnitude Range:\n {mag}'+r'$<$' + 'mag' + r'$<$' +f'{realmagMax}', fontsize=20,
+                    bbox=dict(facecolor='white', boxstyle='round', alpha=0.3),transform=ax.transAxes) 
+
 
             # TOTAL MAGNITUDE IN MOTIF
             if motifstats == motifTotalEnergy:
@@ -161,4 +171,4 @@ for mag in (2,3):
         sql_query = sql_query.replace(f" AND magnitude>={mag}", '');
 
         # Use break to get only the 5km sides
-        #break
+        break
