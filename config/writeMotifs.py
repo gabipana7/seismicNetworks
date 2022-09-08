@@ -85,14 +85,7 @@ def writeNetworksMotifs(nodeCoords,
     if method == 'vtkPolyData':
         polydata = vtk.vtkPolyData()
         polydata.SetPoints(points)
-#        polydata.SetVerts(vertices)
-
-        # if motifCoords:
-        #     if len(motifCoords[0]) == 3:
-        #         polydata.SetPolys(triangles)
-        #     if len(motifCoords[0]) == 4:
-        #         polydata.SetPolys(tetrahedrons)
-            
+   
         if edges:
             polydata.SetLines(lines)
         if scalar:
@@ -109,29 +102,6 @@ def writeNetworksMotifs(nodeCoords,
         writer.SetFileName(fileout+'.vtp')
         writer.SetInputData(polydata)
         writer.Write()
-
-
-    # elif method == 'vtkUnstructuredGrid':
-    #     # caution: ParaView's Tube filter does not work on vtkUnstructuredGrid
-    #     grid = vtk.vtkUnstructuredGrid()
-    #     grid.SetPoints(points)
-
-    #     if edges:
-    #         grid.SetCells(vtk.VTK_LINE, line)
-    #     if scalar:
-    #         grid.GetPointData().AddArray(attribute)
-    #     if scalar2:
-    #         grid.GetPointData().AddArray(attribute2)
-    #     if escalar:
-    #         grid.GetCellData().AddArray(eattribute)
-    #     if escalar2:
-    #         grid.GetCellData().AddArray(eattribute2)
-    #     if nodeLabel:
-    #         grid.GetPointData().AddArray(label)
-    #     writer = vtk.vtkXMLUnstructuredGridWriter()
-    #     writer.SetFileName(fileout+'.vtu')
-    #     writer.SetInputData(grid)
-    #     writer.Write()
 
 
     if motifCoords:

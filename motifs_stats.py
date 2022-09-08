@@ -11,7 +11,7 @@ from config.seismicZones import query
 from config.network import graphCreation3
 
 
-from motifs_areasVolumesEnergy import*
+from motifs_areas_volumes_energy import*
 
 
 # For which region networks do you want to analyze motifs ?

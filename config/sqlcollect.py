@@ -8,6 +8,7 @@ import pandas as pd
 from .config import config
 
 
+
 def getTable(sql_query):
     # Establish a connection to the database by creating a cursor object
 
@@ -18,17 +19,27 @@ def getTable(sql_query):
     # Create a new cursor
     cur = conn.cursor()
 
+    try:
+        cur.execute(sql_query)
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error: %s" % error)
+        cur.close()
+        return 1
+
 
     # Utilize the create_pandas_table function to create a Pandas data frame
     # Store the data as a variable
     # Will issue a warning, but it works 
-    quakes = pd.read_sql_query(sql_query, conn)
-    
+    #quakes = pd.read_sql_query(sql_query, conn)
+    tupples = cur.fetchall()
+
     # Close the cursor and connection to so the server can allocate
     # bandwidth to other requests
     cur.close()
     conn.close()
 
+    column_names = ["datetime", "latitude", "longitude", "depth", "magnitude"]
+    quakes = pd.DataFrame(tupples, columns=column_names)
     # Return quakes table
     return quakes
     
