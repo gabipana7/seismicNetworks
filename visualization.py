@@ -25,7 +25,7 @@ def visualize(quakes,region,withMap=False,mapcoords={}):
 	mean = int(quakes['magnitude'].mean())
 	max1 = int(quakes['magnitude'].max())
 	min1 = int(quakes['magnitude'].min())
-	magnitudesScale=[((x-mean)/(max1-min1))*250 for x in quakes['magnitude']]
+	magnitudesScale=[((x-mean)/(max1-min1))*1000 for x in quakes['magnitude']]
 	# ----------------------------------------------------------------------------------------------#
 
 
